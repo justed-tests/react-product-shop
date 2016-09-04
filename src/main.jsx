@@ -1,5 +1,20 @@
-var React = require('react')
-var ReactDOM = require('react-dom')
-var List = require('./components/list.jsx')
+let React = require('react')
+let ReactDOM = require('react-dom')
+let NavBar = require('./components/nav/NavBar.jsx')
 
-ReactDOM.render(<List />, document.getElementById('ingredients'))
+let navLinks = [
+  {
+    title: 'Home',
+    href: '#'
+  },
+  {
+    title: 'Courses',
+    href: '#'
+  },
+  {
+    title: 'Blog',
+    href: '#'
+  }
+]
+
+ReactDOM.render(<NavBar bgColor="red" titleColor="white" linkColor="yellow" navData={navLinks} />, document.getElementById('nav'))
