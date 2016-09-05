@@ -1,4 +1,6 @@
 let React = require('react')
+let ReactRouter = require('react-router')
+let Link = ReactRouter.Link
 
 let NavItem = React.createClass({
   propTypes: {
@@ -18,9 +20,9 @@ let NavItem = React.createClass({
         onMouseOut={this.mouseOut}
         className={this.state.hover ? 'active' : ''}
       >
-        <a href={this.props.href} style={this.props.aStyle}>
+        <Link to={this.props.href} style={this.props.aStyle}>
           {this.props.title}
-        </a>
+        </Link>
       </li>
     )
   },

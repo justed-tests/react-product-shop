@@ -1,5 +1,7 @@
 let React = require('react')
 let NavItem = require('./NavItem.jsx')
+let ReactRouter = require('react-router')
+let Link = ReactRouter.Link
 
 let NavBar = React.createClass({
   propTypes: {
@@ -36,7 +38,7 @@ let NavBar = React.createClass({
               <span className="icon-bar"></span>
               <span className="icon-bar"></span>
             </button>
-            <a style={titleStyle} className="navbar-brand" href="#">Product Shop</a>
+            <Link style={titleStyle} className="navbar-brand" to="/">Product Shop</Link>
           </div>
           <div className="collapse navbar-collapse" id="nav-collapse">
             <ul className="nav navbar-nav">
