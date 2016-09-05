@@ -17,4 +17,4 @@ let navLinks = [
   }
 ]
 
-ReactDOM.render(<NavBar bgColor="red" titleColor="white" linkColor="yellow" navData={navLinks} />, document.getElementById('nav'))
+ReactDOM.render(<NavBar bgColor="#FFF" titleColor="#3097d1" navData={navLinks} />, document.getElementById('nav'))
