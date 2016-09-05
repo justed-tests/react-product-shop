@@ -20838,16 +20838,31 @@ let NavItem = React.createClass({
     title: React.PropTypes.string,
     aStyle: React.PropTypes.object
   },
+  getInitialState: function () {
+    return {
+      hover: false
+    };
+  },
   render: function () {
     return React.createElement(
       'li',
-      null,
+      {
+        onMouseOver: this.mouseOver,
+        onMouseOut: this.mouseOut,
+        className: this.state.hover ? 'active' : ''
+      },
       React.createElement(
         'a',
         { href: this.props.href, style: this.props.aStyle },
         this.props.title
       )
     );
+  },
+  mouseOver: function () {
+    this.setState({ hover: true });
+  },
+  mouseOut: function () {
+    this.setState({ hover: false });
   }
 });
 
@@ -20869,6 +20884,6 @@ let navLinks = [{
   href: '#'
 }];
 
-ReactDOM.render(React.createElement(NavBar, { bgColor: 'red', titleColor: 'white', linkColor: 'yellow', navData: navLinks }), document.getElementById('nav'));
+ReactDOM.render(React.createElement(NavBar, { bgColor: '#FFF', titleColor: '#3097d1', navData: navLinks }), document.getElementById('nav'));
 
 },{"./components/nav/NavBar.jsx":172,"react":170,"react-dom":1}]},{},[174]);
