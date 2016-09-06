@@ -1,13 +1,22 @@
 let React = require('react')
 let EmailField = require('./EmailField.jsx')
 let NameField = require('./NameField.jsx')
+let Reflux = require('reflux')
+let Actions = require('../../reflux/Actions.jsx')
+let EmailStore = require('../../reflux/EmailStore.jsx')
 
 let LeadCapture = React.createClass({
-  propTypes: {
-    onSubmit: React.PropTypes.func,
-    onError: React.PropTypes.func
+  getInitialState: function () {
+    return {
+      submitted: false
+    }
   },
+  mixins: [Reflux.listenTo(EmailStore, 'onChange')],
+
   render: function () {
+    let feedbackStyle = {
+      visibility: this.state.submitted ? 'visible' : 'hidden'
+    }
     return (
       <div className="panel panel-default">
         <div className="panel-heading">
@@ -17,27 +26,31 @@ let LeadCapture = React.createClass({
           <NameField type="First" ref="fieldName" />
           <EmailField ref="fieldEmail" />
           <button className="btn btn-primary" onClick={this.onSubmit}> Submit </button>
+          <span style={feedbackStyle} >Success</span>
         </div>
       </div>
     )
   },
   onSubmit: function () {
     if (!this.refs.fieldEmail.state.valid) {
-      let error = 'email is invalid'
-      if (this.props.onError) this.props.onError(error)
+      // let error = 'email is invalid'
     } else {
-      let email = this.refs.fieldEmail.state.value
-      let name = this.refs.fieldName.state.value
-      let result = {
-        email: email,
-        name: name
+      let subscriber = {
+        email: this.refs.fieldEmail.state.value,
+        name: this.refs.fieldName.state.value
       }
-      if (this.props.onSubmit) this.props.onSubmit(result)
+      Actions.submitEmail(subscriber)
+
       this.refs.fieldEmail.clear()
       this.refs.fieldName.clear()
-      console.log('do submit')
-      console.log(result)
     }
+  },
+
+  onChange: function (msg) {
+    window.alert(msg)
+    this.setState({
+      submitted: true
+    })
   }
 })
 
